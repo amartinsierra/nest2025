@@ -13,8 +13,9 @@ export class PaisesService {
 
   async findByContinente(continente:string):Promise<Pais[]>{
    const response=await axios.get(this.urlGlobal);
-   const paises:Pais[]=response.data.filter(p=>p.region==continente)
-        .map(p=>new Pais(p.name,p.region,p.population,p.capital,p.flag));
+   const paises:Pais[]=response.data
+   .filter(p=>p.region==continente)
+   .map(p=>new Pais(p.name,p.region,p.population,p.capital,p.flag));
    return paises;
     
   }
