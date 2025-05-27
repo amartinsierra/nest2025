@@ -29,7 +29,7 @@ export class ContactosService {
     return this.contactosRepository.find();
   }
   async deleteByEmail(email:string):Promise<boolean>{
-    //devuelve un boolean, indicando si lo ah eliminado o no
+    //devuelve un boolean, indicando si lo ha eliminado o no
     const result:DeleteResult=await this.contactosRepository.delete({email:email});
     return result.affected>0;
   }
