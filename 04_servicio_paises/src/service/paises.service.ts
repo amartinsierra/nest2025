@@ -1,7 +1,8 @@
 
 
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
 import { Pais } from 'src/model/Pais';
 
@@ -9,8 +10,13 @@ import { Pais } from 'src/model/Pais';
 
 @Injectable()
 export class PaisesService {
-  urlGlobal:string="https://restcountries.com/v2/all"; 
-
+  //urlGlobal:string="https://restcountries.com/v2/all"; 
+  urlGlobal:string; 
+  constructor(private configService: ConfigService){
+    this.urlGlobal=this.configService.get<string>('URL_BASE');
+    console.log(this.urlGlobal);
+  }
+  
   async findByContinente(continente:string):Promise<Pais[]>{
    const response=await axios.get(this.urlGlobal);
    const paises:Pais[]=response.data
