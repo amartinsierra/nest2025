@@ -1,10 +1,22 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { MovimientosController } from './controller/movimientos.controller';
+import { MovimientosService } from './service/movimientos.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Movimiento } from './model/Movimiento';
+
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [TypeOrmModule.forRoot({
+    type: 'mysql',
+    host: 'localhost',
+    port: 3307,
+    username: 'nestuser',
+    password: 'nestpass',
+    database: 'bancabd',
+    entities: [Movimiento],
+    synchronize: false,
+  }), TypeOrmModule.forFeature([Movimiento])],
+  controllers: [MovimientosController],
+  providers: [MovimientosService],
 })
 export class AppModule {}

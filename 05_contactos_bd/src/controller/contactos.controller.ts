@@ -28,6 +28,7 @@ export class ContactosController {
 
   @Get("todos")
   findAll() {
+    console.log("todosssssssssssssssssssssssss");
     return this.contactosService.findAll();
   }
 
