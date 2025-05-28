@@ -17,7 +17,7 @@ export class CuentasService {
       },
       relations:["cuenta"]
     });//Movimiento[]
-    return movimientos.map(m=>m.cuenta);
+    return [...new Set(movimientos.map(m=>m.cuenta))];
   }
   async findByExtraccionMin(cantidad:number):Promise<Cuenta[]>{
     const movimientos:Movimiento[]=await this.movimientosRepository.find({
