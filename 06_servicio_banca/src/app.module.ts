@@ -3,6 +3,7 @@ import { MovimientosController } from './controller/movimientos.controller';
 import { MovimientosService } from './service/movimientos.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Movimiento } from './model/Movimiento';
+import { Cuenta } from './model/Cuenta';
 
 
 @Module({
@@ -13,9 +14,9 @@ import { Movimiento } from './model/Movimiento';
     username: 'nestuser',
     password: 'nestpass',
     database: 'bancabd',
-    entities: [Movimiento],
+    entities: [Movimiento,Cuenta],
     synchronize: false,
-  }), TypeOrmModule.forFeature([Movimiento])],
+  }), TypeOrmModule.forFeature([Movimiento,Cuenta])],
   controllers: [MovimientosController],
   providers: [MovimientosService],
 })
