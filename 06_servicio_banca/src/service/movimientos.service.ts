@@ -37,6 +37,11 @@ export class MovimientosService {
 
 
  findByFechas(fecha1:Date,fecha2:Date):Promise<Movimiento[]>{
-  return this.repository.findBy({fecha:Between(fecha1,fecha2)});
+  return this.repository.find({
+    where:{
+        fecha:Between(fecha1,fecha2)
+    },
+    relations:["cuenta"]
+    });
  }
 }
