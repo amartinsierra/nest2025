@@ -1,6 +1,12 @@
+import { IsDate, IsInt, IsString, Length } from "class-validator";
+
 export class CursoAltaDto{    
+        @IsString()
+        @Length(2,20)
         nombre: string;
+        @IsInt()
         duracion: number;
+        @IsDate()
         fechaInicio: Date;    
         precio: number;
     
