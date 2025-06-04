@@ -4,6 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Repository } from 'typeorm';
 import { ContactosService } from './contactos.service';
 import { Contacto } from 'src/model/Contacto';
+import { getRepositoryToken } from '@nestjs/typeorm';
 
 
 describe('ContactosService', () => {
@@ -17,7 +18,7 @@ describe('ContactosService', () => {
 
   const mockRepository = {
     find: jest.fn().mockResolvedValue(mockContactos),
-    findOneBy: jest.fn().mockImplementation((nombre: string) =>
+    findOneBy: jest.fn().mockImplementation(({nombre}) =>
       Promise.resolve(mockContactos.find(cont => cont.nombre === nombre)),
     ),
   };
@@ -27,14 +28,14 @@ describe('ContactosService', () => {
       providers: [
         ContactosService,
         {
-          provide: Repository<Contacto>,
+          provide: getRepositoryToken(Contacto),
           useValue: mockRepository,
         },
       ],
     }).compile();
 
     service = module.get<ContactosService>(ContactosService);
-    repo = module.get(Repository<Contacto>);
+    repo = module.get(getRepositoryToken(Contacto));
   });
 
   it('should return all users', async () => {
@@ -46,6 +47,6 @@ describe('ContactosService', () => {
   it('should return one user by id', async () => {
     const contacto = await service.findByNombre("Ana")
     expect(contacto).toEqual(mockContactos[0]);
-    expect(repo.findOneBy).toHaveBeenCalledWith("Ana");
+    expect(repo.findOneBy).toHaveBeenCalledWith({nombre:"Ana"});
   });
 });

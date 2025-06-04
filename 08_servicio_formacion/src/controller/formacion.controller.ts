@@ -14,6 +14,10 @@ import { MatriculasService } from 'src/service/matriculas.service';
 import {Response} from 'express';
 import { MatriculaNuevaDto } from 'src/dtos/MatriculaNuevaDto';
 
+import { CursoResultadoDto } from 'src/dtos/CursoResultadoDto';
+import { AlumnoResultadoDto } from 'src/dtos/AlumnoResultadoDto';
+import { CursoAltaDto } from 'src/dtos/CursoAltaDto';
+
 @Controller('formacion')
 export class FormacionController {
   constructor(private readonly alumnosService: AlumnosService,
@@ -25,7 +29,7 @@ export class FormacionController {
     return this.cursosService.findAll();
   }
   @Get('noMatriculados/:idCurso')
-  alumnosNoMatriculados(@Param("idCurso") idCurso:number){
+  alumnosNoMatriculados(@Param("idCurso") idCurso:number):Promise<AlumnoResultadoDto[]>{
     return this.alumnosService.findByNoMatriculadoEnCurso(idCurso);
   }
  /* @Post('matricular/:idCurso/:usuario')
@@ -45,5 +49,9 @@ export class FormacionController {
     }else{
       response.status(409).send();
     }
+  }
+  @Post('nuevoCurso')
+  nuevoCurso(@Body()curso:CursoAltaDto){
+    return this.cursosService.save(curso);
   }
 }

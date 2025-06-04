@@ -17,7 +17,7 @@ export class ContactosService {
     if(resultado){
       return false;
     }else{
-      this.contactosRepository.save(contacto);
+      await this.contactosRepository.save(contacto);
       return true;
     }
      

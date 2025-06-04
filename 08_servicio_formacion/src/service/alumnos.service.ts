@@ -18,7 +18,7 @@ export class AlumnosService {
         //ahora buscamos los alumnos cuyo usuario no esté en esa lista
         return (await this.alumnosRepository.createQueryBuilder("alumno")
                 .where("alumno.usuario not in (:...ids)",{ids:usuariosEnCurso})
-                .getMany())
-                .map(a=>new AlumnoResultadoDto(a.usuario,a.password,a.nombre,a.email,a.edad));
+                .getMany());
+                //.map(a=>new AlumnoResultadoDto(a.usuario,a.password,a.nombre,a.email,a.edad));
     }
 }
