@@ -22,7 +22,12 @@ export class Matricula{
         this.curso=curso;
         this.nota=nota;
         this.alumno=alumno;
-        this.idCurso=curso.idCurso;
-        this.usuario=alumno.usuario
+        if(curso){
+            this.idCurso=curso.idCurso;
+        }
+        if(alumno){
+            this.usuario=alumno.usuario;
+        }
+        
     }
 }
