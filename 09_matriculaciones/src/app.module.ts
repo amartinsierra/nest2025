@@ -7,7 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Matricula } from './model/Matricula';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
-
+//module
 @Module({
   imports: [ConfigModule.forRoot({
          isGlobal: true, // hace que esté disponible en toda la app
