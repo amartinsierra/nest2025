@@ -36,6 +36,8 @@ export class PedidosService {
       //por último, guardamos el pedido
       const pedidoNuevo:Pedido=new Pedido(0,pedido.unidades,pedido.unidades*prod.precioUnitario,new Date(),prod);
       this.pedidosRepository.save(pedidoNuevo);
+      return true;
     }
+
   }
 }
