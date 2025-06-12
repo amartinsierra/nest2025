@@ -11,6 +11,7 @@ import { AutenticacionController } from './controller/autenticacion.controller';
 import { AutenticacionService } from './service/autenticacion.service';
 import { UsuariosService } from './service/usuarios.service';
 import { JwtStrategy } from './security/jwt.strategy';
+import { Usuario } from './model/Usuario';
 
 
 @Module({
@@ -21,7 +22,7 @@ import { JwtStrategy } from './security/jwt.strategy';
     username: 'nestuser',
     password: 'nestpass',
     database: 'tiendavirtual',
-    entities: [Pedido,Producto],
+    entities: [Pedido,Producto,Usuario],
     synchronize: false,
   }),
   PassportModule,
@@ -29,7 +30,7 @@ import { JwtStrategy } from './security/jwt.strategy';
     secret: 'mysecret',
     signOptions: { expiresIn: '1h' },
     }),
-  TypeOrmModule.forFeature([Pedido,Producto])],
+  TypeOrmModule.forFeature([Pedido,Producto,Usuario])],
   controllers: [PedidosProductosController,AutenticacionController],
   providers: [PedidosService,ProductosService,AutenticacionService,UsuariosService,JwtStrategy],
 })
