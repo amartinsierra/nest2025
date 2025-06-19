@@ -44,6 +44,7 @@ export class LibreriaController {
   @Get('compras')
   comprasUsuario(@Req() req:Request){
     const usuario:string=req.cookies["user"];
+    console.log("cookie: "+usuario);
     if(usuario){
       return this.comprasService.ventasCliente(usuario);
     }
